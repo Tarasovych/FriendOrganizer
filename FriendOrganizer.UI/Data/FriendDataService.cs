@@ -2,7 +2,8 @@
 using FriendOrganizer.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace FriendOrganizer.UI.Data
 {
@@ -14,11 +15,11 @@ namespace FriendOrganizer.UI.Data
         {
             _contextCreator = contextCreator;
         }
-        public IEnumerable<Friend> GetAll()
+        public async Task<List<Friend>> GetAllAsync()
         {
             using (var ctx = _contextCreator())
             {
-                return ctx.Friends.AsNoTracking().ToList();
+                return await ctx.Friends.AsNoTracking().ToListAsync();
             }
         }
     }
